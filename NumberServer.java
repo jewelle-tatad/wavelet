@@ -6,18 +6,29 @@ class Handler implements URLHandler {
     // various requests.
     int num = 0;
 
+    /**
+     * This method takes in a URI/URL to handle requests and counts how many times you've visited
+     * the page.
+     */
     public String handleRequest(URI url) {
+        /**
+         * Checks path
+         * If in the default (/) path, display the total count (num)
+         */
         if (url.getPath().equals("/")) {
-            return String.format("Number: %d", num);
+            return String.format("Jewelle's Number: %d", num);
+        // If in /increment path, increment num by 1
         } else if (url.getPath().equals("/increment")) {
             num += 1;
             return String.format("Number incremented!");
+        // counts how many times incremented and adds num to the total amount
         } else {
             System.out.println("Path: " + url.getPath());
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
                 if (parameters[0].equals("count")) {
                     num += Integer.parseInt(parameters[1]);
+                    // displays increment and total
                     return String.format("Number increased by %s! It's now %d", parameters[1], num);
                 }
             }
