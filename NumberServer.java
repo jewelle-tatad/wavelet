@@ -21,14 +21,18 @@ class Handler implements URLHandler {
         } else if (url.getPath().equals("/increment")) {
             num += 1;
             return String.format("Number incremented!");
-        // counts how many times incremented and adds num to the total amount
+        // adds a specified amount to num
+        // /add?count=<num>
         } else {
             System.out.println("Path: " + url.getPath());
             if (url.getPath().contains("/add")) {
+                // splits at = to create an array
                 String[] parameters = url.getQuery().split("=");
+                // looks for object "count" at the first idx of the parameters[]
                 if (parameters[0].equals("count")) {
+                    // adds the "count" to num
                     num += Integer.parseInt(parameters[1]);
-                    // displays increment and total
+                    // displays total
                     return String.format("Number increased by %s! It's now %d", parameters[1], num);
                 }
             }
